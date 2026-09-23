@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opinions, Likes &amp; Dislikes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mist: #EDF3F2;
+    --ink: #10303A;
+    --ink-soft: #456670;
+    --line: #5F808A;
+    --focus: #0B62A4;
+    --font: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --opinion-c: #F4B5A0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    background: var(--mist);
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .page {
+    max-width: 1100px;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0 auto;
+    padding: clamp(0.75rem, 2.2vw, 1.5rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .back {
+    display: inline-block;
+    flex: 0 0 auto;
+    margin-bottom: 0.5rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .back:hover { text-decoration: underline; }
+  .back:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  header { flex: 0 0 auto; }
+
+  header h1 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  header p {
+    margin: 0.25rem 0 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+
+  /* Opinion tile */
+  .opinion-tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: clamp(4.5rem, 10vh, 6.5rem);
+    margin: 0.65rem 0 0;
+    padding: clamp(0.75rem, 2vw, 1.2rem) clamp(1rem, 2.6vw, 1.6rem);
+    border: 0;
+    border-radius: 0.9rem;
+    background: var(--opinion-c);
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+    text-align: center;
+  }
+  .opinion-tile:hover { filter: brightness(0.97); }
+  .opinion-tile:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
+
+  .tag {
+    position: absolute;
+    top: 0.8rem;
+    left: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .opinion {
+    font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    max-width: 100%;
+    text-wrap: balance;
+  }
+
+  @keyframes settle {
+    from { opacity: 0; transform: translateY(0.4rem); }
+    to   { opacity: 1; transform: none; }
+  }
+  .opinion.fresh { animation: settle 0.22s ease-out; }
+
+  /* Language reference */
+  .lang-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-top: 0.75rem;
+    overflow-y: auto;
+  }
+
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: clamp(0.45rem, 1.2vw, 0.75rem);
+    margin: 0;
+    padding: 0 0.1rem 0.1rem;
+    list-style: none;
+    height: 100%;
+  }
+
+  .lang-grid li:nth-child(6n+1) { --c: #A8D5CB; }
+  .lang-grid li:nth-child(6n+2) { --c: #F2D9A6; }
+  .lang-grid li:nth-child(6n+3) { --c: #C9C3EA; }
+  .lang-grid li:nth-child(6n+4) { --c: #A9CCEB; }
+  .lang-grid li:nth-child(6n+5) { --c: #F0C2D3; }
+  .lang-grid li:nth-child(6n+6) { --c: #C7DE9F; }
+
+  .lang-card {
+    height: 100%;
+    padding: 0.8rem 1rem 0.9rem;
+    border-radius: 0.75rem;
+    background: var(--c);
+  }
+
+  .lang-card h3 {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .lang-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .lang-card li {
+    font-size: clamp(0.95rem, 1.25vw, 1.1rem);
+    line-height: 1.32;
+  }
+
+  footer {
+    flex: 0 0 auto;
+    margin-top: 0.5rem;
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+  }
+
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+
+    white-space: nowrap;
+  }
+
+  @media (max-width: 820px) {
+    .lang-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .lang-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .opinion.fresh { animation: none; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <a class="back" href="https://coastoflight.github.io/">&larr; COAST of LIGHT</a>
+
+  <header>
+    <h1>Opinions, likes &amp; dislikes</h1>
+    <p>Tap the statement for a new one to react to. Use the language below to ask, answer, agree, disagree and personalise.</p>
+  </header>
+
+  <button type="button" class="opinion-tile" id="opinion-tile" aria-label="Click for another opinion">
+    <span class="tag" aria-hidden="true">Opinion</span>
+    <span class="opinion" id="opinion"></span>
+  </button>
+  <p class="sr" role="status" id="status"></p>
+
+  <div class="lang-scroll">
+  <ul class="lang-grid">
+    <li>
+      <div class="lang-card">
+        <h3>Asking for opinion</h3>
+        <ul>
+          <li>What's your opinion on&hellip;?</li>
+          <li>What do you think about&hellip;?</li>
+          <li>How do you feel about&hellip;?</li>
+          <li>Would you agree with that?</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="lang-card">
+        <h3>Opinion</h3>
+        <ul>
+          <li>In my opinion&hellip;</li>
+          <li>I think / reckon&hellip;</li>
+          <li>From my point of view&hellip;</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="lang-card">
+        <h3>Likes / dislikes</h3>
+        <ul>
+          <li>I'm into&hellip;</li>
+          <li>I'm a keen / avid (surfer)</li>
+          <li>I'm keen on / fond of (surfing)</li>
+          <li>I'm a fan of&hellip;</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="lang-card">
+        <h3>Agreeing</h3>
+        <ul>
+          <li>You're absolutely right.</li>
+          <li>I feel the same.</li>
+          <li>I couldn't agree more.</li>
+          <li>I think so too / Totally.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="lang-card">
+        <h3>Disagreeing</h3>
+        <ul>
+          <li>I don't think so&hellip;</li>
+          <li>I take your point but&hellip;</li>
+          <li>Hhhmmm, I'm not so sure&hellip;</li>
+          <li>I see what you mean but&hellip;</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="lang-card">
+        <h3>Personalising</h3>
+        <ul>
+          <li>Speaking from personal experience,&hellip;</li>
+          <li>For me personally,&hellip;</li>
+          <li>I'd prefer &hellip; because &hellip;</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  </div>
+
+  <footer>
+    <p>Coast of Light &mdash; classroom speaking practice.</p>
+  </footer>
+</main>
+
+<script>
+/* ---------------------------------------------------------------
+   Opinions to react to. Add or remove a line freely — one
+   statement per entry, no trailing comma needed on the last one.
+---------------------------------------------------------------- */
+const OPINIONS = [
+  "Summer is the worst season.",
+  "Cats make better pets than dogs.",
+  "Pineapple belongs on pizza.",
+  "Breakfast is the most important meal of the day.",
+  "Tortilla is better without onion.",
+  "Films are always worse than the book.",
+  "Reality TV is a waste of time.",
+  "It's rude to be on your phone during a meal.",
+  "Everyone should learn to cook before leaving home.",
+  "Working from home is better than going to an office.",
+  "Homework should be banned.",
+  "Beach holidays are boring.",
+  "Football players are paid far too much.",
+  "Social media does more harm than good.",
+  "You should never lend money to friends.",
+  "Old music is better than modern music.",
+  "Mornings are the best part of the day.",
+  "Tourists ruin the places they visit.",
+  "Kids shouldn't have smartphones until they're 16.",
+  "It's better to rent than to buy a house."
+];
+
+const tile = document.getElementById("opinion-tile");
+const opinionEl = document.getElementById("opinion");
+const statusEl = document.getElementById("status");
+
+function shuffle(list) {
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list;
+}
+
+/* Draws from a shuffled deck so opinions don't repeat until the whole list has been used. */
+let deck = [];
+let current = "";
+
+function next() {
+  if (!deck.length) deck = shuffle(OPINIONS.slice());
+  let opinion = deck.pop();
+  if (opinion === current && deck.length) opinion = deck.pop();
+  current = opinion;
+
+  opinionEl.textContent = opinion;
+  opinionEl.classList.remove("fresh");
+  void opinionEl.offsetWidth;
+  opinionEl.classList.add("fresh");
+  statusEl.textContent = opinion;
+}
+
+tile.addEventListener("click", next);
+document.addEventListener("keydown", (event) => {
+  if (event.ctrlKey || event.metaKey || event.altKey) return;
+  const tag = document.activeElement && document.activeElement.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
+  if (event.code === "Space" || event.code === "Enter") { event.preventDefault(); next(); }
+});
+
+next();
+</script>
+</body>
+</html>
