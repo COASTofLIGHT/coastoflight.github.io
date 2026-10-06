@@ -33,6 +33,28 @@
     padding: clamp(1rem, 3vw, 2.25rem);
   }
 
+  /* Title on the left, The Story link on the right. */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-link {
+    flex: none;
+    padding: 0.45rem 0.95rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-link:hover { background: var(--ink); color: var(--mist); }
+  .nav-link:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
+
   header h1 {
     margin: 0;
     font-size: clamp(1.9rem, 4vw, 3rem);
@@ -117,7 +139,10 @@
 <body>
 <main class="page">
   <header>
-    <h1>COAST of LIGHT play</h1>
+    <div class="top">
+      <h1>COAST of LIGHT play</h1>
+      <a class="nav-link" href="the-story.html">The Story</a>
+    </div>
     <p>Tools for playing with words, ideas and conversation.</p>
   </header>
 
