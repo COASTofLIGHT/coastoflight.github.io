@@ -13,10 +13,6 @@
     --ink: #10303A;
     --ink-soft: #456670;
     --focus: #0B62A4;
-    --sand: #F2D9A6;
-    --dusk: #F4B5A0;
-    --night: #C9C3EA;
-    --sea: #A8D5CB;
     --font: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
   }
 
@@ -76,86 +72,21 @@
   .nav-link:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
 
   /* Reading text */
-  .story,
-  .more {
+  .story {
     max-width: 36rem;
     font-size: 1.1rem;
     line-height: 1.55;
   }
   .story { margin-top: 2rem; }
-  .story p,
-  .more p { margin: 0 0 1rem; }
+  .story p { margin: 0 0 1rem; }
 
-  /* The first four stages of the teacher career cycle, in order */
-  .stages {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(0.6rem, 1.6vw, 1.1rem);
-    margin: 2rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-  .stages li {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.4rem;
-    min-height: 10rem;
-    padding: clamp(1rem, 2vw, 1.5rem);
-    border-radius: 0.9rem;
-    background: var(--c);
-  }
-  .stages li:nth-child(1) { --c: var(--sand); }
-  .stages li:nth-child(2) { --c: var(--dusk); }
-  .stages li:nth-child(3) { --c: var(--night); }
-  .stages li:nth-child(4) { --c: var(--sea); }
-
-  .stages .years {
-    margin-bottom: auto;
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-  .stages .name {
-    font-size: clamp(1.5rem, 2.8vw, 2rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    text-wrap: balance;
-  }
-  .stages .line {
-    min-height: 2.7em;
-    font-size: 1rem;
-    line-height: 1.35;
-  }
-
-  .credit {
-    margin: 0.9rem 0 0;
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-    line-height: 1.45;
-  }
-
-  .more { margin-top: 2.5rem; }
-  .story h2,
-  .more h2 {
-    margin: 2rem 0 0.5rem;
-    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-  .story h2:first-child,
-  .more h2:first-child { margin-top: 0; }
-
-  .story a,
-  .more a {
+  .story a {
     color: var(--ink);
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 0.18em;
   }
-  .story a:focus-visible,
-  .more a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .story a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
   .sign {
     margin-top: 1.5rem;
@@ -178,11 +109,6 @@
   }
   footer a:hover { text-decoration: underline; }
   footer a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-
-  @media (max-width: 720px) {
-    .stages { grid-template-columns: 1fr; }
-    .stages li { min-height: 9rem; }
-  }
 </style>
 </head>
 <body>
@@ -195,49 +121,8 @@
   </header>
 
   <section class="story">
-    <p>In 2007 I went to my first ACEIA teaching conference, in Sevilla. In the opening plenary Tessa Woodward talked about the stages of a teaching life, and she called the first three years Survival and Discovery.</p>
-    <p>At the end of those three years of Survival and Discovery I started a blog called <a href="https://tefldust.blogspot.com/">DUST</a>. I had Discovered and Uncovered, Survived and been Tested. For years it has been where I have kept ideas and activities that I like. Some have come and gone, but others remain.</p>
-    <p>By the third stage, years 7 to 18, and after stabilisation, the dust I had created slowly turned to stars. That didn't come without the odd passing black hole, of course. Now here I am, in year 20. Put enough stars together and you will find light, and that's where creatively I now sit: on the coast of light.</p>
-    <p>COAST of LIGHT play is many of these classroom ideas, rebuilt as tools (with the help of Claude) to use projected in class. The focus is often on random words, which I've long been a fan of using to create sentences. My students have helped me user test it. Maybe you can too.</p>
-  </section>
-
-  <ol class="stages">
-    <li>
-      <span class="years">Years 1 to 3</span>
-      <span class="name">Survival and discovery</span>
-      <span class="line">A painful or easy start, and the shock of the real classroom.</span>
-    </li>
-    <li>
-      <span class="years">Years 4 to 6</span>
-      <span class="name">Stabilisation</span>
-      <span class="line">Growing confidence, a style of your own, and the choice to stay.</span>
-    </li>
-    <li>
-      <span class="years">Years 7 to 18</span>
-      <span class="name">Experimentation</span>
-      <span class="line">Trying new materials, groupings and ideas. For some, doubt and thoughts of leaving.</span>
-    </li>
-    <li>
-      <span class="years">Years 19 to 30</span>
-      <span class="name">Serenity</span>
-      <span class="line">More relaxed and self-accepting. For some, holding on to the past.</span>
-    </li>
-  </ol>
-  <p class="credit">The first four stages of Michael Huberman's teacher career cycle (1989), as summarised by Tessa Woodward.</p>
-
-  <section class="more">
-    <h2>What's here?</h2>
-    <p>Tools for playing with words and ideas, and for starting conversations: random pickers, question makers, wordlists, sentence builders and games for a whole class.</p>
-    <p>I make them for my own English classes. They go up on the board and the class thinks, talks or writes. Many began as DUST posts or as activities on paper, and have been rebuilt here so they can be played again and again.</p>
-
-    <h2>How is it made?</h2>
-    <p>One page at a time. I bring an activity and what I know about how it works in a real classroom, build the page in conversation with Claude, an AI assistant, and keep changing it until it plays right. Then it goes into class, and usually gets changed again.</p>
-
-    <h2>Whose is it?</h2>
-    <p>Everything here is my own creation unless a page says otherwise. Some games are inspired by ones I have met elsewhere over the years, and I wouldn't know who to credit. If an idea came from another site, the page says so. If it doesn't and you think it should, let me know.</p>
-
-    <h2>The Coast!</h2>
-    <p>COAST of LIGHT takes its name from the Costa de la Luz, the stretch of the Cádiz coast in Spain where I live and teach. It is a creative project of colour and craft that is building slowly, and you can find out more about it on the <a href="https://coastoflight.blog/">blog</a>.</p>
+    <p>Through survival and discovery, and years of experimenting and creating, latterly shrouded in doubt, I have arrived with some serenity on the coast of light. I have always been creative in class. I enjoy the randomness of language learning, and I love students making and saying sentences of their own, with a little help from a prompt.</p>
+    <p>Most of the ideas here have been gathered over my twenty years of teaching. Some name their source; others are simply activities teachers have been doing for years. Each page has been built with the help of Claude, who has finally enabled me to create what was in my head. For more of what’s happening on the coast of light, follow the <a href="https://coastoflight.blog/">blog</a> or find me on <a href="https://www.instagram.com/coastoflight/">Instagram</a>.</p>
 
     <p class="sign">Steve</p>
   </section>
