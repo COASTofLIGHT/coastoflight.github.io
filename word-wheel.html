@@ -149,6 +149,27 @@
 
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+  /* The Well done! sign, shown when the tenth word goes in */
+  .done {
+    width: min(92vw, 34rem); padding: 0; border: 4px solid var(--ink); border-radius: 1.4rem;
+    background: var(--panel); color: var(--ink); text-align: center; overflow: hidden;
+    box-shadow: 0 18px 50px rgba(16, 48, 58, 0.35);
+  }
+  .done::backdrop { background: rgba(16, 48, 58, 0.5); }
+  .done[open] { animation: sign 0.22s ease-out; }
+  .done .stripe {
+    height: 1.1rem;
+    background: linear-gradient(90deg,
+      #A8D5CB 0 14.3%, #F2D9A6 0 28.6%, #F4B5A0 0 42.9%, #C9C3EA 0 57.1%,
+      #A9CCEB 0 71.4%, #F0C2D3 0 85.7%, #C7DE9F 0);
+  }
+  .done form { padding: clamp(1.2rem, 4vw, 2rem) clamp(1rem, 4vw, 2.2rem) clamp(1.3rem, 4vw, 2.2rem); }
+  .done h2 { margin: 0; font-size: clamp(2.6rem, 8vw, 4.2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+  .done p { text-wrap: balance; margin: 0.6rem 0 1.4rem; font-size: clamp(1.1rem, 2.6vw, 1.35rem); line-height: 1.35; }
+  .done .buttons { justify-content: center; gap: 0.8rem; }
+  .done .buttons button { min-height: 54px; padding: 8px 24px; font-size: 1.2rem; font-weight: 800; }
+  @keyframes sign { from { transform: scale(0.9); opacity: 0; } to { transform: none; opacity: 1; } }
+
   @media (max-width: 760px) {
     .play { grid-template-columns: 1fr; }
     .wheel { width: min(100%, 320px); }
@@ -156,7 +177,7 @@
     .slots[data-cols] li { font-size: 1.1rem; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .slots li.fresh, .entry.bad input { animation: none; }
+    .slots li.fresh, .entry.bad input, .done[open] { animation: none; }
     .cell .shape, .cell text { transition: none; }
   }
 </style>
@@ -206,6 +227,19 @@
     </div>
   </div>
 </main>
+
+<!-- The sign that comes up at ten words. Escape works like "Find more words". -->
+<dialog class="done" id="done" aria-labelledby="doneTitle">
+  <div class="stripe"></div>
+  <form method="dialog">
+    <h2 id="doneTitle">Well done!</h2>
+    <p id="doneText"></p>
+    <div class="buttons">
+      <button class="next" type="submit" value="more">Find more words</button>
+      <button class="show" type="submit" value="end">End challenge</button>
+    </div>
+  </form>
+</dialog>
 
 <script>
 (function () {
@@ -435,7 +469,24 @@
     else if (found.length === TARGET) say(`${TARGET} words! ${left} more everyday words to find.`);
     else if (found.length < TARGET) say(`Good. ${TARGET - found.length} to go.`);
     else say("Good.");
+
+    if (found.length === TARGET) wellDone();
   }
+
+  /* ---------- Well done! The tenth word brings up the sign ---------- */
+  function wellDone() {
+    const gotNine = found.some(x => x.length === 9);
+    $("doneText").textContent = gotNine
+      ? `You found ${TARGET} words, and the 9-letter word is one of them.`
+      : `You found ${TARGET} words. The 9-letter word is still hiding.`;
+    const d = $("done");
+    d.returnValue = "";
+    d.showModal();
+  }
+  /* "End challenge" shows the answers; "Find more words" (or Escape) carries on */
+  $("done").addEventListener("close", () => {
+    if ($("done").returnValue === "end") reveal();
+  });
 
   function drawFound(fresh) {
     const slots = $("slots");
@@ -519,7 +570,7 @@
 
   /* Typing anywhere on the page goes into the word box */
   document.addEventListener("keydown", e => {
-    if (revealed || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (revealed || $("done").open || e.ctrlKey || e.metaKey || e.altKey) return;
     const t = e.target;
     if (t === input) return;
     const onControl = t instanceof HTMLButtonElement || t instanceof HTMLAnchorElement;
