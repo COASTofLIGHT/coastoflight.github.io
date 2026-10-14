@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found | COAST of LIGHT play</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mist: #EDF3F2;
+    --ink: #10303A;
+    --ink-soft: #456670;
+    --focus: #0B62A4;
+    --font: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--mist);
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2.25rem);
+  }
+
+  h1 {
+    margin: clamp(1rem, 6vh, 3.5rem) 0 0;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .lead {
+    margin: 0.7rem 0 0;
+    max-width: 34rem;
+    color: var(--ink-soft);
+    font-size: 1.15rem;
+    line-height: 1.45;
+  }
+
+  .home {
+    display: inline-block;
+    margin-top: 1.6rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--mist);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .home:hover { background: #1B4652; }
+  .home:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
+
+</style>
+</head>
+<body>
+<main class="page">
+  <!-- This page is shown for any address on the site that doesn't exist,
+       so the link here is a full address, not ./ -->
+  <h1>This page has drifted away.</h1>
+  <p class="lead">It may have moved or been renamed while the site was being tidied. Head back to the shore and you'll find it from there.</p>
+
+  <a class="home" href="https://coastoflight.github.io/">Back to COAST of LIGHT play</a>
+
+</main>
+</body>
+</html>
