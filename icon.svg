@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><clipPath id="r"><rect width="64" height="64" rx="14"/></clipPath></defs>
+  <g clip-path="url(#r)">
+    <rect width="64" height="64" fill="#10303A"/>
+    <!-- the light -->
+    <polygon points="28,18 0,6 0,30" fill="#F2D9A6"/>
+    <polygon points="36,18 64,6 64,30" fill="#F2D9A6"/>
+    <!-- the sea -->
+    <rect x="0" y="52" width="64" height="12" fill="#17677A"/>
+    <!-- the tower, with one stripe -->
+    <polygon points="25,28 39,28 43,57 21,57" fill="#F9FBFB"/>
+    <polygon points="23.6,38 40.4,38 41.5,46 22.5,46" fill="#F4B5A0"/>
+    <!-- the gallery, the lamp room and the roof -->
+    <rect x="21.5" y="25" width="21" height="4" rx="1" fill="#F9FBFB"/>
+    <rect x="25.5" y="13" width="13" height="12.5" fill="#F9FBFB"/>
+    <rect x="28" y="15.5" width="8" height="8" fill="#F2D9A6"/>
+    <polygon points="23.5,14 40.5,14 32,4.5" fill="#F9FBFB"/>
+  </g>
+</svg>
