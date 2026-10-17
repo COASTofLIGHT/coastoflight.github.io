@@ -72,12 +72,29 @@
   .nav-link:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
 
   /* Reading text */
+  /* Two frames side by side: the story on the left, the drawing on the right */
+  .layout {
+    margin-top: 2rem;
+    display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(1rem, 2.5vw, 1.75rem); align-items: start;
+  }
+  .frame { background: #F9FBFB; border-radius: 0.9rem; padding: clamp(1.1rem, 2.6vw, 2rem); }
+
   .story {
-    max-width: 36rem;
     font-size: 1.1rem;
     line-height: 1.55;
   }
-  .story { margin-top: 2rem; }
+  .story > p:first-child { margin-top: 0; }
+
+  /* The drawing, in a white frame that stays in view while the story scrolls */
+  .portrait { margin: 0; position: sticky; top: 1.5rem; background: #fff; }
+  .portrait img { display: block; width: 100%; height: auto; border-radius: 0.4rem; }
+  .portrait figcaption { margin-top: 0.75rem; color: var(--ink-soft); font-size: 0.9rem; text-align: center; }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    .portrait { position: static; order: -1; max-width: 22rem; justify-self: center; }
+  }
   .story p { margin: 0 0 1rem; }
 
   .story a {
@@ -139,7 +156,8 @@
     </div>
   </header>
 
-  <section class="story">
+  <div class="layout">
+  <section class="story frame">
     <p>After years of discovery, of experimenting, and latterly of doubt, I have arrived, with some serenity, at the coast of light.</p>
 
     <p>COAST of LIGHT play is a collection of the classroom tools and activities I have found most useful in my twenty years of teaching. Some name their source; others are old favourites teachers everywhere know. They work best projected onto a large screen.</p>
@@ -169,6 +187,12 @@
       <a href="https://ko-fi.com/coastoflight" target="_blank" rel="noopener">Buy me a drink</a>
     </div>
   </section>
+
+  <figure class="portrait frame">
+    <img src="steve-drawing.jpg" width="1000" height="1000" alt="A black ink drawing of Steve in glasses and a polo shirt, giving a peace sign and holding a card that says Speak English!, under a sign that also says Speak English.">
+    <figcaption>Me, as drawn by one of my students.</figcaption>
+  </figure>
+  </div>
 
   <footer>
     <p>COAST of LIGHT is a creative project based on the Cádiz coast in Spain. The tools here are original creations unless a page says otherwise. © 2026 COAST of LIGHT.</p>
