@@ -93,6 +93,25 @@
     font-size: 1.1rem;
   }
 
+  /* The thank-you card under the signature: a drink icon and one clear button */
+  .drink {
+    margin-top: 2.25rem;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    padding: 1rem 1.15rem;
+    background: #F2D9A6;   /* sand, one of the seven site colours */
+    border-radius: 0.9rem;
+  }
+  .drink svg { flex: none; width: 3.4rem; height: 3.4rem; padding: 0.45rem; background: #F9FBFB; border-radius: 50%; }
+  .drink p { flex: 1 1 14rem; margin: 0; font-size: 1rem; line-height: 1.4; }
+  .drink p small { display: block; color: var(--ink-soft); font-size: 0.85rem; margin-top: 0.15rem; }
+  .story .drink a {
+    flex: none;
+    padding: 0.55rem 1.1rem; border-radius: 999px;
+    background: var(--ink); color: var(--mist);
+    font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap;
+  }
+  .story .drink a:hover { background: #1B4652; }
+
   footer {
     margin: 2.75rem 0 0;
     padding-top: 1.75rem;
@@ -137,10 +156,22 @@
     </script>
 
     <p class="sign">Steve</p>
+
+    <div class="drink">
+      <!-- A glass with a straw and a slice of lemon -->
+      <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#10303A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 15h24l-3 27a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2z" fill="#F9FBFB"/>
+        <path d="M13 24h20"/>
+        <path d="M27 15l5-11h6"/>
+        <circle cx="36" cy="16" r="4.5" fill="#C7DE9F"/>
+      </svg>
+      <p>COAST of LIGHT play is free to use. If you have enjoyed the content and it helps your classes, please consider buying me a drink so I can keep it going. Thank you!<small>Paid safely through PayPal.</small></p>
+      <a href="https://ko-fi.com/coastoflight" target="_blank" rel="noopener">Buy me a drink</a>
+    </div>
   </section>
 
   <footer>
-    <p><a href="https://coastoflight.github.io/">COAST of LIGHT play</a></p>
+    <p>COAST of LIGHT is a creative project based on the Cádiz coast in Spain. The tools here are original creations unless a page says otherwise. © 2026 COAST of LIGHT.</p>
   </footer>
 </main>
 </body>
