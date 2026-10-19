@@ -86,11 +86,16 @@
 
   .tiles {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: 1fr;
     gap: clamp(0.6rem, 1.6vw, 1.1rem);
     margin: 2rem 0 0;
     padding: 0;
     list-style: none;
+  }
+
+  /* Two tiles across on laptops and projectors, one on phones. */
+  @media (min-width: 40rem) {
+    .tiles { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* Colours cycle automatically, so new tiles need no extra styling. */
@@ -164,7 +169,7 @@
     Tile colours cycle automatically.
   -->
   <ul class="tiles">
-   <li>
+    <li>
       <a href="https://coastoflight.github.io/selectors/">
         <span class="title">Selectors</span>
         <span class="about">Random pickers.</span>
@@ -172,26 +177,22 @@
     </li>
     <li>
       <a href="https://coastoflight.github.io/word-lab/">
-        
         <span class="title">Word Lab</span>
         <span class="about">Words and sentences.</span>
       </a>
     </li>
-     <li>
+    <li>
       <a href="https://coastoflight.github.io/question-time/">
         <span class="title">Question Time</span>
         <span class="about">Questions and Conversation starters.</span>
       </a>
     </li>
-     
     <li>
-  <a href="https://coastoflight.github.io/group-chat/">
-    <span class="title">Group Chat</span>
-    <span class="about">Talk first, then share.</span>
-  </a>
-</li>
-   
-  
+      <a href="https://coastoflight.github.io/group-chat/">
+        <span class="title">Group Chat</span>
+        <span class="about">Talk first, then share.</span>
+      </a>
+    </li>
   </ul>
 
   <footer>
