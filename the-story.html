@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Story | COAST of LIGHT play</title>
+<meta name="description" content="The story behind COAST of LIGHT play, free classroom tools for English teachers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
@@ -49,14 +50,6 @@
     line-height: 1.05;
   }
 
-  header p {
-    margin: 0.5rem 0 0;
-    max-width: 34rem;
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-    line-height: 1.4;
-  }
-
   .nav-link {
     flex: none;
     padding: 0.45rem 0.95rem;
@@ -71,7 +64,6 @@
   .nav-link:hover { background: var(--ink); color: var(--mist); }
   .nav-link:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
 
-  /* Reading text */
   /* Two frames side by side: the story on the left, the drawing on the right */
   .layout {
     margin-top: 2rem;
@@ -165,13 +157,15 @@
 
     <p>Each page has been built with the help of Claude, who has finally enabled me to create what was in my head.</p>
 
-    <p>For more of what’s happening on the coast of light, follow the <a href="https://coastoflight.blog/">blog</a> or find me on <a href="https://www.instagram.com/coastoflight/">Instagram</a>. You can also get in touch, suggest an idea or report an issue (the site is still in progress) at <a id="mail" href="#">studio [at] coastoflight.blog</a>.</p>
+    <p>For more of what’s happening on the coast of light, follow the <a href="https://coastoflight.blog/">blog</a> or find me on <a href="https://www.instagram.com/coastoflight/">Instagram</a>. You can also get in touch, suggest an idea or report an issue at <span id="mail">studio [at] coastoflight.blog</span>. The site is still a work in progress.</p>
     <script>
-      /* The address is put together here, so spam bots reading the page can't pick it up. */
+      /* The address is put together here, so spam bots reading the page can't pick it up.
+         Without JavaScript, visitors still see the readable "studio [at]" version as plain text. */
       const mailUser = "studio", mailDomain = "coastoflight.blog";
-      const mailLink = document.getElementById("mail");
+      const mailLink = document.createElement("a");
       mailLink.href = "mailto:" + mailUser + "@" + mailDomain;
       mailLink.textContent = mailUser + "@" + mailDomain;
+      document.getElementById("mail").replaceWith(mailLink);
     </script>
 
     <p class="sign">Steve</p>
