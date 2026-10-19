@@ -96,6 +96,23 @@
   }
   .story a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
+  /* The small "Copied!" note that appears after the email address is clicked */
+  .copied {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.05rem 0.55rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--mist);
+    font-size: 0.8rem;
+    font-weight: 600;
+    vertical-align: 0.1em;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .copied:empty { display: none; }
+  .copied.show { opacity: 1; }
+
   .sign {
     margin-top: 1.5rem;
     font-size: 1.1rem;
@@ -151,13 +168,13 @@
   <section class="story frame">
     <p>After years of discovery, of experimenting, and latterly of doubt as a teacher of English, I have arrived, with some serenity, at the coast of light.</p>
 
-    <p>COAST of LIGHT is a creative project based on the Cádiz coast in Spain (you can see more <a href="https://coastoflight.blog/">here</a>). COAST of LIGHT play is its language-learning side: a collection of classroom tools, mostly random generators, alongside thinking and sentence-building tasks.</p>
+    <p>COAST of LIGHT is a creative project based on the Cádiz coast in Spain (you can see more <a href="https://coastoflight.blog/" target="_blank" rel="noopener">here</a>). COAST of LIGHT play is its language-learning side: a collection of classroom tools, mostly random generators, alongside thinking and sentence-building tasks.</p>
 
     <p>I have always been creative in class. I enjoy the randomness of language learning and have long used random generators. I love students making and saying sentences of their own, with a little help from a prompt, and most of the tools here are made for exactly that.</p>
 
     <p>Each page has been built with the help of Claude, who has finally enabled me to create what was in my head.</p>
 
-    <p>For more of what’s happening on the coast of light, follow the <a href="https://coastoflight.blog/">blog</a> or find me on <a href="https://www.instagram.com/coastoflight/">Instagram</a>. You can also get in touch, suggest an idea or report an issue at <span id="mail">studio [at] coastoflight.blog</span>. The site is still a work in progress.</p>
+    <p>For more of what’s happening on the coast of light, follow the <a href="https://coastoflight.blog/blog/" target="_blank" rel="noopener">blog</a> or find me on <a href="https://www.instagram.com/coastoflight/" target="_blank" rel="noopener">Instagram</a>. You can also get in touch, suggest an idea or report an issue at <span id="mail">studio [at] coastoflight.blog</span>. The site is still a work in progress.</p>
     <script>
       /* The address is put together here, so spam bots reading the page can't pick it up.
          Without JavaScript, visitors still see the readable "studio [at]" version as plain text. */
@@ -166,6 +183,28 @@
       mailLink.href = "mailto:" + mailUser + "@" + mailDomain;
       mailLink.textContent = mailUser + "@" + mailDomain;
       document.getElementById("mail").replaceWith(mailLink);
+
+      /* Clicking the address also copies it, for visitors with no email app set up.
+         The link still tries to open the email app as normal. */
+      const copiedNote = document.createElement("span");
+      copiedNote.className = "copied";
+      copiedNote.setAttribute("aria-live", "polite");
+      mailLink.after(copiedNote);
+      let copiedTimer;
+      mailLink.addEventListener("click", () => {
+        const address = mailUser + "@" + mailDomain;
+        const done = () => {
+          copiedNote.textContent = "Copied!";
+          copiedNote.classList.add("show");
+          clearTimeout(copiedTimer);
+          copiedTimer = setTimeout(() => copiedNote.classList.remove("show"), 2500);
+        };
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(address).then(done).catch(() => {});
+          }
+        } catch (e) { /* copying isn't available here; the email link still works */ }
+      });
     </script>
 
     <p class="sign">Steve</p>
